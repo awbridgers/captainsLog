@@ -3,8 +3,8 @@ html {
 }
 
 body {
-  padding-top: 40px;
-  /*background: url("background.png") no-repeat;*/
+  /*padding-top: 40px;*/
+  background: url("background.png") no-repeat;
   color: white;
 }
 .starter-template {

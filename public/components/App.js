@@ -13,6 +13,11 @@ var FirstComponent = React.createClass({
   }
 });
 
+var SecondComponent = React.createClass({
+  render: function(){
+    return <h1> Second Component!</h1>
+  }
+})
 var Button = React.createClass({
   render:
   function (){
@@ -23,4 +28,4 @@ var Button = React.createClass({
 
 
 
-module.exports=[FirstComponent, Button];
+module.exports=[FirstComponent, Button, SecondComponent];

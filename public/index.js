@@ -1,23 +1,49 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var App = require('./components/App.js');
-var Nav = require('./components/sideBar.js');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavBar from './components/sideBar.js';
+import HomePage from './components/homepage.js';
+import LoginPage from './components/logIn.js';
+import CreatePage from './components/create.js';
+
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import * as firebase from 'firebase'
+
+const Home = () => <h1><Link to= "/about">Click Me</Link></h1>
+const About = () => <div><NavBar /><h1>About Us</h1></div>
+const Create = () => <div><h1>Create Page</h1></div>
 
 
-var Mycomp = App[0];
-var Button = App[1];
-var NavBar = Nav[0];
 
 
-  var View = React.createClass({
-  handleClick: function(){
-    alert("Hello World!");
-  },
-  render: function (){
-    return <div style = {{ fontSize: 32, "text-align": "center", backgroundColor: 'black', padding: "0px", width: "100%", margin: "0px", color: "white" }}>
-      Hello World</div>;
+//TODO: REMOVE NAVBAR FROM THE APP FUNCTION AND ADD TO SEPARATE COMPS
+//THAT WAY YOU CAN'T NAVIGATE WITHOUT LOGGING IN
 
-  }
-});
 
- ReactDOM.render(<View />, document.getElementById('app'));
+var config = {
+    apiKey: "AIzaSyAKE8EUUoc2GPmrGAEL9yG1obONaOCnoBA",
+    authDomain: "react-log.firebaseapp.com",
+    databaseURL: "https://react-log.firebaseio.com",
+    projectId: "react-log",
+    storageBucket: "react-log.appspot.com",
+    messagingSenderId: "393475920879"
+  };
+
+firebase.initializeApp(config);
+
+const App = () => (
+  <Router>
+    <div>
+    <Route exact path ="/" component = {LoginPage} />
+    <Route path ='/home' component = {HomePage} />
+    <Route path ="/about" component = {About} />
+    <Route path = "/create" component = {CreatePage} />
+    </div>
+  </Router>
+)
+
+
+export default App;
+
+
+
+ReactDOM.render(<App />, document.getElementById('app'));

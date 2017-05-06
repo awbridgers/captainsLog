@@ -1,14 +1,12 @@
-#app {
+/*#app {
   position: fixed;
   width: 300px;
   height: 200px;
   top: 50%;
   left: 50%;
   text-align: center;
-  margin: -100px 0 0 -150px;
+  margin: -100px 0 0 -150px;*/
 
-
-}
 
 button {
   -webkit-transition-duration: 0.1s; /* Safari */
