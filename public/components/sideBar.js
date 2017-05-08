@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import * as firebase from "firebase";
+import PropTypes from 'prop-types';
 
 var divstyle = {
   backgroundColor: "#eee",
@@ -38,7 +39,6 @@ export default class NavBar extends React.Component{
     firebase.auth().signOut().then(function() {
 
     console.log('sign out worked!');
-    console.log(firebase.auth().currentUser.uid);
     }, function(error) {
       alert(error);
     });

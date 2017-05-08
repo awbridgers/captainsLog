@@ -2,6 +2,7 @@ import React from 'react';
 import Background from '../css/images/background4.png';
 import * as firebase from 'firebase';
 import NavBar from './sideBar.js';
+import PropTypes from 'prop-types';
 
 
 

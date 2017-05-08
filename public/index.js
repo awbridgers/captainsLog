@@ -4,6 +4,7 @@ import NavBar from './components/sideBar.js';
 import HomePage from './components/homepage.js';
 import LoginPage from './components/logIn.js';
 import CreatePage from './components/create.js';
+import PropTypes from 'prop-types';
 
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import * as firebase from 'firebase'

@@ -3,6 +3,7 @@ import Style from '../css/loginPage.css';
 import {Redirect, Link} from 'react-router-dom';
 import Background from '../css/images/logInBackground.png';
 import * as firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 //FIXME: Change background to move with login elements when page is resized
 
@@ -67,7 +68,7 @@ export default class LoginComp extends React.Component {
 
       });
 
-      firebase.auth().onAuthStateChanged(function(user) {
+      this.auth = firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             this.setState({redirect: true});
             console.log(user.uid);
@@ -92,7 +93,7 @@ export default class LoginComp extends React.Component {
     return (
       <div style = {bigDiv}>
       <section style = {sectionStyle}>
-        <div>
+        <div key='divKey'>
           <form method="post" action="index.html">
             <p><input type="text" value = {this.state.username}  placeholder="Username or Email" onChange = {this.changeUser}/></p>
             <p><input type="password" value = {this.state.password} placeholder="Password" onChange = {this.changePass}/></p>
@@ -108,4 +109,8 @@ export default class LoginComp extends React.Component {
     </div>
     )
     }
+    componentWillUnmount(){
+      this.auth();
+      }
+
 }
