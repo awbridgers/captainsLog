@@ -45,13 +45,24 @@ export default class LoginComp extends React.Component {
     // An error happened.
     });
   }
+
+  componentWillMount(){
+    this.auth = firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+          this.setState({unMount: true})
+          this.setState({redirect: true});
+          console.log(user.uid);
+
+      } else {
+        // No user is signed in.
+      }
+    }.bind(this));
+  }
+
   handleClick(){
-      var error = false;
+
       console.log(this.state.username);
       console.log(this.state.password);
-
-
-
 
       firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
         // Handle Errors here.
@@ -65,18 +76,11 @@ export default class LoginComp extends React.Component {
         else{
           alert(errorMessage);
         }
+        this.setState(unMount:true);
 
       });
-      this.setState({unMount: true});
-      this.auth = firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-            this.setState({redirect: true});
-            console.log(user.uid);
 
-        } else {
-          // No user is signed in.
-        }
-      }.bind(this));
+
   }
   changeUser(event){
     this.setState({username: event.target.value});
@@ -112,7 +116,7 @@ export default class LoginComp extends React.Component {
     componentWillUnmount(){
       if(this.state.unMount){
       this.auth();
-    }
       }
+    }
 
 }

@@ -18,11 +18,26 @@ var buttonStyle = {width:"150px",height: "50px", position: "relative",
 export default class CreateAccount extends React.Component{
   constructor(){
     super();
-    this.state = {email:"", password:"", confirmPassword:"", redirect:false, unMount: false};
+    this.state = {email:"", password:"", confirmPassword:"", redirect:false, unMount: false, userID: null};
     this.handleEmail = this.handleEmail.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
     this.handlePass = this.handlePass.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
+
+  }
+  componentWillMount(){
+    this.checkUser = firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+          alert('Account Created');
+          this.setState({unMount: true})
+          this.setState({redirect: true});
+          console.log(user.uid);
+
+      } else {
+        // No user is signed in.
+      }
+    }.bind(this));
+
   }
   handleEmail(event){
     this.setState({email: event.target.value});
@@ -39,23 +54,19 @@ export default class CreateAccount extends React.Component{
           var errorCode = error.code;
           var errorMessage = error.message;
           alert(errorMessage);
-          // ...
-        });
-        this.setState({unMount: true});
 
-    }
+          // ...
+        })
+
+      }
     else{
       alert("Passwords do not match!");
     }
-    this.checkUser = firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-          alert("Account Successfully Created");
-          this.setState({redirect: true});
 
-      } else {
-        // No user is signed in.
-      }
-    }.bind(this));
+
+
+
+
 
     // console.log(this.state.email);
     // console.log(this.state.password);
