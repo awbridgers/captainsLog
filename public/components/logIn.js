@@ -34,7 +34,7 @@ export default class LoginComp extends React.Component {
   constructor(props){
     super();
     //FIXME: REMOVE USER AND PASS AFTER TESTING
-    this.state = {username: "test@test.com", password: "123456", redirect: false};
+    this.state = {username: "test@test.com", password: "123456", redirect: false, unMount: false};
     this.handleClick = this.handleClick.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.changePass = this.changePass.bind(this);
@@ -67,7 +67,7 @@ export default class LoginComp extends React.Component {
         }
 
       });
-
+      this.setState({unMount: true});
       this.auth = firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             this.setState({redirect: true});
@@ -110,7 +110,9 @@ export default class LoginComp extends React.Component {
     )
     }
     componentWillUnmount(){
+      if(this.state.unMount){
       this.auth();
+    }
       }
 
 }

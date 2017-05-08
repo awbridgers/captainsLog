@@ -18,7 +18,7 @@ var buttonStyle = {width:"150px",height: "50px", position: "relative",
 export default class CreateAccount extends React.Component{
   constructor(){
     super();
-    this.state = {email:"", password:"", confirmPassword:"", redirect:false};
+    this.state = {email:"", password:"", confirmPassword:"", redirect:false, unMount: false};
     this.handleEmail = this.handleEmail.bind(this);
     this.buttonClick = this.buttonClick.bind(this);
     this.handlePass = this.handlePass.bind(this);
@@ -41,12 +41,13 @@ export default class CreateAccount extends React.Component{
           alert(errorMessage);
           // ...
         });
+        this.setState({unMount: true});
 
     }
     else{
       alert("Passwords do not match!");
     }
-    firebase.auth().onAuthStateChanged(function(user) {
+    this.checkUser = firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
           alert("Account Successfully Created");
           this.setState({redirect: true});
@@ -76,6 +77,11 @@ export default class CreateAccount extends React.Component{
       </div>
     )
 
+  }
+  componentWillUnmount(){
+    if(this.state.unMount){
+    this.checkUser();
+  }
   }
 
 
