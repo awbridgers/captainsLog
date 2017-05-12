@@ -59,7 +59,9 @@ export default class LoginComp extends React.Component {
     }.bind(this));
   }
 
-  handleClick(){
+  handleSubmit(event){
+    event.preventDefault();
+    event.stopPropagation();
 
       console.log(this.state.username);
       console.log(this.state.password);
@@ -77,6 +79,7 @@ export default class LoginComp extends React.Component {
           alert(errorMessage);
         }
         this.setState(unMount:true);
+
 
       });
 
@@ -98,11 +101,11 @@ export default class LoginComp extends React.Component {
       <div style = {bigDiv}>
       <section style = {sectionStyle}>
         <div key='divKey'>
-          <form method="post" action="index.html">
+          <form onSubmit = {this.handleClick}>
             <p><input type="text" value = {this.state.username}  placeholder="Username or Email" onChange = {this.changeUser}/></p>
             <p><input type="password" value = {this.state.password} placeholder="Password" onChange = {this.changePass}/></p>
 
-            <p><button type="button" style = {buttonStyle} onClick={this.handleClick}>Log In</button></p>
+            <p><button type="submit" style = {buttonStyle} onClick={this.handleSubmit}>Log In</button></p>
           </form>
         </div>
 
