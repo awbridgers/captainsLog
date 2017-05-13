@@ -12,6 +12,20 @@ var divStyle = {
   position: "fixed"
 }
 
+var nextButton = {
+  position:"relative", right: "-350px", bottom:"-52px",
+  borderRadius:"2px",height: "35px", width: "50px",
+  fontSize: "16", textAlign:"center",
+
+};
+
+var prevButton = {
+  position: "relative", left: "-350px", top: "-54px",
+  borderRadius:"2px",height: "35px", width: "50px",
+  fontSize: "16", textAlign:"center",
+
+};
+
 
 
 
@@ -21,7 +35,12 @@ export class Viewer extends React.Component{
   }
   render(){
     return (
-      <div></div>
+      <div style = {{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}>
+        <span><button style = {nextButton} type ="button">></button>
+        <h2><font color = "white">DateDateDateDate</font></h2>
+        <button style = {prevButton} type = "button">&lt;</button>
+        </span>
+      </div>
   )}
 }
 
