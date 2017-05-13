@@ -35,7 +35,7 @@ export default class LoginComp extends React.Component {
     super();
     //FIXME: REMOVE USER AND PASS AFTER TESTING
     this.state = {username: "test@test.com", password: "123456", redirect: false, unMount: false};
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.changePass = this.changePass.bind(this);
     //FOR TEST: Log current user out to ensure login page works
@@ -101,7 +101,7 @@ export default class LoginComp extends React.Component {
       <div style = {bigDiv}>
       <section style = {sectionStyle}>
         <div key='divKey'>
-          <form onSubmit = {this.handleClick}>
+          <form onSubmit = {this.handleSubmit}>
             <p><input type="text" value = {this.state.username}  placeholder="Username or Email" onChange = {this.changeUser}/></p>
             <p><input type="password" value = {this.state.password} placeholder="Password" onChange = {this.changePass}/></p>
 

@@ -4,6 +4,7 @@ import NavBar from './components/sideBar.js';
 import HomePage from './components/homepage.js';
 import LoginPage from './components/logIn.js';
 import CreatePage from './components/create.js';
+import ViewerPage from './components/logViewer.js';
 import PropTypes from 'prop-types';
 
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
@@ -38,6 +39,7 @@ const App = () => (
     <Route path ='/home' component = {HomePage} />
     <Route path ="/about" component = {About} />
     <Route path = "/create" component = {CreatePage} />
+    <Route path = "/viewer" component = {ViewerPage} />
     </div>
   </Router>
 )

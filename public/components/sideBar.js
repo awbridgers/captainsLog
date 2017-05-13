@@ -45,7 +45,10 @@ export default class NavBar extends React.Component{
   }
   render() {
     return (<div style = {{ backgroundColor: 'black', padding: "0px", width: "100%", margin: "0px", position: "relative"}}>
-      <NavBarItem url = "/home" text = "Home" /><NavBarItem url = "/about" text = "About" />
+      <NavBarItem url = "/home" text = "Home" />
+      <NavBarItem url = "/viewer" text = "View Logs" />
+      <NavBarItem url = "/about" text = "About" />
+
       <Link to = "/" style = {logOutSyle} onClick = {this.logOut}>Log Out</Link></div>)
 
   }
