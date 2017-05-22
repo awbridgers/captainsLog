@@ -81,8 +81,8 @@ export default class CreateAccount extends React.Component{
       <div style ={bigDiv}>
         <div style = {{marginLeft: "auto", marginRight: "auto", textAlign: "center", marginTop:"296px", display: "block"}}>
         <p><input type = "text" placeholder = "Email" onChange = {this.handleEmail} /></p>
-        <p><input type = "text" placeholder = "Password" onChange ={this.handlePass} /></p>
-        <p><input type = "text" placeholder = "Confirm Password" onChange = {this.handleConfirm}/></p>
+        <p><input type = "password" placeholder = "Password" onChange ={this.handlePass} /></p>
+        <p><input type = "password" placeholder = "Confirm Password" onChange = {this.handleConfirm}/></p>
         <p><button style ={buttonStyle} type="button" onClick = {this.buttonClick}>Sign Up</button></p>
         </div>
       </div>
