@@ -33,7 +33,7 @@ function getDayOfWeek(day){
 
 
 //a function to get the month
-function getMonth(month){
+var getMonth = (month) => {
   var monthName;
   switch (month) {
     case 0:
@@ -76,7 +76,7 @@ function getMonth(month){
   }
   return monthName;
 }
-function getDayOfWeek(day){
+var getDayOfWeek = (day) => {
   var dayName;
   switch (day) {
     case 0:

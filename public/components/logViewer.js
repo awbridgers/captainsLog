@@ -22,7 +22,7 @@ var logView ={
   textAlign: "justify",
   // -moz-text-align-last: center;
    textAlignLast: "center",
-  //  whiteSpace: "pre-line"
+   whiteSpace: "pre-line"
 
 
 }
@@ -80,7 +80,7 @@ export class Viewer extends React.Component{
           if(this.state.logArray.length > 0){
               if(this.state.logArray[this.state.index].date === temp.date){
                   temp.type = "supplemental"
-                  var supLog = "<br/> <b>Captain's Log Supplemental: </b>" + temp.text;
+                  var supLog = "\nCaptain's Log Supplemental: " + temp.text;
                   this.state.logArray[this.state.index].text += supLog;
               }
             }
@@ -152,8 +152,7 @@ export class Viewer extends React.Component{
           <h2><font color = "white">Captain's Log: {this.state.logArray[this.state.index].date}</font></h2>
           <button style = {prevButton} type = "button" onClick = {this.previousButtonClick}>&lt;</button>
           </span>
-          <div style = {logView}
-            dangerouslySetInnerHTML={{__html: this.state.logArray[this.state.index].text.replace(/\n/g, '<br />')}}></div>
+          <div style = {logView}>{this.state.logArray[this.state.index].text}</div>
           </font>
         </div>
       </ReactScrollbar>
