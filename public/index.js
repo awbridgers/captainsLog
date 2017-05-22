@@ -21,7 +21,7 @@ const Create = () => <div><h1>Create Page</h1></div>
 //THAT WAY YOU CAN'T NAVIGATE WITHOUT LOGGING IN
 
 
-var config = {
+let config = {
     apiKey: "AIzaSyAKE8EUUoc2GPmrGAEL9yG1obONaOCnoBA",
     authDomain: "react-log.firebaseapp.com",
     databaseURL: "https://react-log.firebaseio.com",

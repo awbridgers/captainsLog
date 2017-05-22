@@ -4,37 +4,12 @@ import * as firebase from 'firebase';
 import NavBar from './sideBar.js';
 import PropTypes from 'prop-types';
 
-function getDayOfWeek(day){
-  var dayName;
-  switch (day) {
-    case 0:
-        dayName = "Sun.";
-        break;
-    case 1:
-        dayName = "Mon.";
-        break;
-    case 2:
-        dayName = "Tue.";
-        break;
-    case 3:
-        dayName = "Wed.";
-        break;
-    case 4:
-        dayName = "Thu.";
-        break;
-    case 5:
-        dayName = "Fri.";
-        break;
-    case 6:
-        dayName = "Sat.";
-  }
-  return dayName;
-}
+
 
 
 //a function to get the month
-var getMonth = (month) => {
-  var monthName;
+let getMonth = (month) => {
+  let monthName;
   switch (month) {
     case 0:
         monthName = "January";
@@ -75,9 +50,9 @@ var getMonth = (month) => {
 
   }
   return monthName;
-}
-var getDayOfWeek = (day) => {
-  var dayName;
+};
+let getDayOfWeek = (day) => {
+  let dayName;
   switch (day) {
     case 0:
         dayName = "Sun.";
@@ -102,16 +77,16 @@ var getDayOfWeek = (day) => {
   }
   return dayName;
 }
-var getDay = () => {
-  var today = new Date();
-  var day = getDayOfWeek(today.getDay());
-  var dd = today.getDate();
-  var mm = today.getMonth()+1;
-  var yyyy= today.getFullYear();
+let getDay = () => {
+  let today = new Date();
+  let day = getDayOfWeek(today.getDay());
+  let dd = today.getDate();
+  let mm = today.getMonth()+1;
+  let yyyy= today.getFullYear();
   return (day +" "+ mm+"-" +dd+"-"+yyyy)
 }
 
-var divStyle = {
+let divStyle = {
   backgroundImage: "url(" + Background + ")",
   height: "100%",
   width: "100%",

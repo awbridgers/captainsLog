@@ -5,14 +5,14 @@ import * as firebase from 'firebase';
 import PropTypes from 'prop-types';
 
 
-var bigDiv = {
+let bigDiv = {
   backgroundImage: "url(" + Background + ")",
   position: "fixed",
   height: "100%",
   width: "100%"
 }
 
-var buttonStyle = {width:"150px",height: "50px", position: "relative",
+let buttonStyle = {width:"150px",height: "50px", position: "relative",
     display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
 
 export default class CreateAccount extends React.Component{
@@ -51,8 +51,8 @@ export default class CreateAccount extends React.Component{
   buttonClick(){
     if(this.state.password === this.state.confirmPassword){
       firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          let errorCode = error.code;
+          let errorMessage = error.message;
           alert(errorMessage);
 
           // ...

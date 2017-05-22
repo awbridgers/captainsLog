@@ -7,14 +7,14 @@ import PropTypes from 'prop-types';
 import ReactScrollbar from "react-scrollbar-js";
 //import style from "scrollBar.css";
 
-var divStyle = {
+let divStyle = {
   backgroundImage: "url(" + Background + ")",
   height: "100%",
   width: "100%",
   position: "fixed"
 }
 
-var logView ={
+let logView ={
   paddingBottom: "100px", display: "block",
   margin: "auto",
   width: "50em",
@@ -32,14 +32,14 @@ const myScrollbar = {
       height: "100%",
     };
 
-var nextButton = {
+let nextButton = {
   position:"relative", right: "-250px", bottom:"-52px",
   borderRadius:"2px",height: "35px", width: "50px",
   fontSize: 16, textAlign:"center",
 
 };
 
-var prevButton = {
+let prevButton = {
   position: "relative", left: "-250px", top: "-54px",
   borderRadius:"2px",height: "35px", width: "50px",
   fontSize: 16, textAlign:"center",
@@ -74,13 +74,13 @@ export class Viewer extends React.Component{
       .then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
 
-          var temp = new logEntry(childSnapshot.val().date, childSnapshot.val().logEntry);
+          let temp = new logEntry(childSnapshot.val().date, childSnapshot.val().logEntry);
 
 
           if(this.state.logArray.length > 0){
               if(this.state.logArray[this.state.index].date === temp.date){
                   temp.type = "supplemental"
-                  var supLog = "\nCaptain's Log Supplemental: " + temp.text;
+                  let supLog = "\nCaptain's Log Supplemental: " + temp.text;
                   this.state.logArray[this.state.index].text += supLog;
               }
             }
@@ -89,7 +89,7 @@ export class Viewer extends React.Component{
           //console.log(temp.text);
 
           if(temp.type === 'main' && this.loadingData){
-            var tempArray = this.state.logArray.slice()
+            let tempArray = this.state.logArray.slice()
             tempArray.push(temp);
             this.setState({logArray: tempArray});
             this.setState({index: this.state.logArray.length-1});

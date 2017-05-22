@@ -3,19 +3,19 @@ import {Link} from "react-router-dom";
 import * as firebase from "firebase";
 import PropTypes from 'prop-types';
 
-var divstyle = {
+let divstyle = {
   backgroundColor: "#eee",
   padding: "20px",
   margin: "20px"
 
 };
 
-var linkSyle = {fontSize: 14, display: "inline-block",
+let linkSyle = {fontSize: 14, display: "inline-block",
   verticalAlign: "middle", backgroundColor: "#262626",
   textAlign: "center", margin: "0px", marginRight: "5px",
   padding: "14px 25px", textDecoration: "none", color: "white" };
 
-  var logOutSyle = {fontSize: 14, display: "inline-block",
+  let logOutSyle = {fontSize: 14, display: "inline-block",
     verticalAlign: "middle", backgroundColor: "#262626",
     textAlign: "center", margin: "0px", marginRight: "0px",
     padding: "14px 25px", textDecoration: "none", color: "white", position: "absolute", right: "0px"};

@@ -7,14 +7,14 @@ import PropTypes from 'prop-types';
 
 //FIXME: Change background to move with login elements when page is resized
 
-var bigDiv = {
+let bigDiv = {
   backgroundImage: "url(" + Background + ")",
   position: "fixed",
   height: "100%",
   width: "100%"
 }
 
-var sectionStyle ={
+let sectionStyle ={
   display: "block",
   margin: "0px",
   marginRight: "auto",
@@ -24,7 +24,7 @@ var sectionStyle ={
 
 }
 
-var buttonStyle = {width:"150px",height: "50px", position: "relative",
+let buttonStyle = {width:"150px",height: "50px", position: "relative",
     display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
 
 
@@ -68,8 +68,8 @@ export default class LoginComp extends React.Component {
 
       firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        let errorCode = error.code;
+        let errorMessage = error.message;
 
 
         if(errorCode == 'auth/user-not-found'){
