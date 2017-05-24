@@ -27,9 +27,10 @@ export default class CreateAccount extends React.Component{
   }
   componentWillMount(){
     this.checkUser = firebase.auth().onAuthStateChanged(function(user) {
+      this.setState({unMount: true})
       if (user) {
           alert('Account Created');
-          this.setState({unMount: true})
+
           this.setState({redirect: true});
           console.log(user.uid);
 

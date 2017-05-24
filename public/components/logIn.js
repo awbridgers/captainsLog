@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 let bigDiv = {
   backgroundImage: "url(" + Background + ")",
+  backgroundSize: "cover",
   position: "fixed",
   height: "100%",
   width: "100%"
@@ -34,7 +35,7 @@ export default class LoginComp extends React.Component {
   constructor(props){
     super();
     //FIXME: REMOVE USER AND PASS AFTER TESTING
-    this.state = {username: "test@test.com", password: "123456", redirect: false, unMount: false};
+    this.state = {username: "", password: "", redirect: false, unMount: false};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.changePass = this.changePass.bind(this);
@@ -48,10 +49,11 @@ export default class LoginComp extends React.Component {
 
   componentWillMount(){
     this.auth = firebase.auth().onAuthStateChanged(function(user) {
+      this.setState({unMount: true})
       if (user) {
-          this.setState({unMount: true})
+
           this.setState({redirect: true});
-          console.log(user.uid);
+          //console.log(user.uid);
 
       } else {
         // No user is signed in.
@@ -63,8 +65,8 @@ export default class LoginComp extends React.Component {
     event.preventDefault();
     event.stopPropagation();
 
-      console.log(this.state.username);
-      console.log(this.state.password);
+      //console.log(this.state.username);
+      //console.log(this.state.password);
 
       firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
         // Handle Errors here.
@@ -93,7 +95,7 @@ export default class LoginComp extends React.Component {
   }
   render() {
     if(this.state.redirect){
-      console.log("Working!");
+      //console.log("Working!");
       return <Redirect to="/home" />
 
     }

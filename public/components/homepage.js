@@ -3,7 +3,7 @@ import Background from '../css/images/background4.png';
 import * as firebase from 'firebase';
 import NavBar from './sideBar.js';
 import PropTypes from 'prop-types';
-
+import {Redirect, Link} from 'react-router-dom';
 
 
 
@@ -99,14 +99,22 @@ let divStyle = {
 export class InputText extends React.Component{
 constructor(props){
   super(props);
-  this.state = {userInput: ""};   //userID: firebase.auth().currentUser.uid
+  this.state = {userInput: "", loggedIn: false};   //userID: firebase.auth().currentUser.uid
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
+  //this.uid = firebase.auth().currentUser.uid;
+  //this.ref = firebase.database().ref(this.uid);
   }
   componentWillMount(){
-    this.uid = firebase.auth().currentUser.uid;
-    this.date = getDay();
-    this.ref = firebase.database().ref(this.uid);
+    if((this.uid = firebase.auth().currentUser.uid) && (this.ref = firebase.database().ref(this.uid))){
+      this.setState({loggedIn: true})
+      console.log(this.state.loggedIn);
+    }
+    else{
+      this.setState({loggedIn: false});
+      console.log(this.state.loggedIn);
+    }
+    //console.log(this.uid);
 
   }
   handleChange(event){
@@ -114,8 +122,9 @@ constructor(props){
   }
   handleSubmit(){
     if(this.state.userInput.length > 0 && confirm("Are you ready to post this entry?")){
+      this.date = getDay();
       this.ref.push({date: this.date, logEntry: this.state.userInput});
-      console.log("Log Entry Succesfully Posted!");
+      //console.log("Log Entry Succesfully Posted!");
       this.setState({userInput: ""});     //reset text field to be empty
     }
     else if(this.state.userInput.length === 0){
@@ -123,17 +132,26 @@ constructor(props){
     }
   }
   render(){
-    return (
-      <div style = {{display:"block", textAlign: "center", marginLeft:"auto", marginRight:"auto", marginTop: "300px"}}>
-      <form>
-        <textarea rows ='10' onChange = {this.handleChange} value = {this.state.userInput}
-          style = {{width: "800px", height: "175px",resize: 'none',fontSize: 15}}>
-        </textarea>
-        <button type = 'button' onClick = {this.handleSubmit} style = {{width:"100px",
-          height: "50px", position: "relative", display: "block", margin: "auto", borderRadius: "8px" }}>Submit</button>
-      </form>
-      </div>
-    );
+    if(! this.state.loggedIn){
+      alert("You are not logged in. Please log in to use the Captain's Log");
+      return (
+        <Redirect to = "/" />
+
+      )
+    }
+    if(this.state.loggedIn){
+      return (
+        <div style = {{display:"block", textAlign: "center", marginLeft:"auto", marginRight:"auto", marginTop: "300px"}}>
+        <form>
+          <textarea rows ='10' onChange = {this.handleChange} value = {this.state.userInput}
+            style = {{width: "800px", height: "175px",resize: 'none',fontSize: 15}}>
+          </textarea>
+          <button type = 'button' onClick = {this.handleSubmit} style = {{width:"100px",
+            height: "50px", position: "relative", display: "block", margin: "auto", borderRadius: "8px" }}>Submit</button>
+        </form>
+        </div>
+      );
+    }
   }
 }
 

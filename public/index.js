@@ -21,7 +21,9 @@ const Create = () => <div><h1>Create Page</h1></div>
 //THAT WAY YOU CAN'T NAVIGATE WITHOUT LOGGING IN
 
 
-let config = {
+
+  // Initialize Firebase
+  var config = {
     apiKey: "AIzaSyAKE8EUUoc2GPmrGAEL9yG1obONaOCnoBA",
     authDomain: "react-log.firebaseapp.com",
     databaseURL: "https://react-log.firebaseio.com",
@@ -30,7 +32,9 @@ let config = {
     messagingSenderId: "393475920879"
   };
 
-firebase.initializeApp(config);
+
+  firebase.initializeApp(config);
+
 
 const App = () => (
   <Router>

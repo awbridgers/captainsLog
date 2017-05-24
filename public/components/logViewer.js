@@ -4,7 +4,7 @@ import Background from '../css/images/viewerBackgroundAlt2.png';
 import NavBar from './sideBar.js';
 import * as firebase from 'firebase';
 import PropTypes from 'prop-types';
-import ReactScrollbar from "react-scrollbar-js";
+import {Scrollbars} from 'react-custom-scrollbars';
 //import style from "scrollBar.css";
 
 let divStyle = {
@@ -146,7 +146,7 @@ export class Viewer extends React.Component{
     }
 
     return (
-      <ReactScrollbar style = {myScrollbar}>
+      <Scrollbars style = {myScrollbar}>
         <div style = {{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}><font color = "white">
           <span style = {{display: "inline-block", marginTop: "-35px"}}><button style = {nextButton} type ="button" onClick = {this.nextButtonClick}>></button>
           <h2><font color = "white">Captain's Log: {this.state.logArray[this.state.index].date}</font></h2>
@@ -155,7 +155,7 @@ export class Viewer extends React.Component{
           <div style = {logView}>{this.state.logArray[this.state.index].text}</div>
           </font>
         </div>
-      </ReactScrollbar>
+      </Scrollbars>
   );}
 
   componentWillUnmount(){
