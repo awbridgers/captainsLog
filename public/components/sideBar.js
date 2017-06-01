@@ -38,7 +38,7 @@ export default class NavBar extends React.Component{
     console.log(firebase.auth().currentUser.uid);
     firebase.auth().signOut().then(function() {
 
-    console.log('sign out worked!');
+    //console.log('sign out worked!');
     }, function(error) {
       alert(error);
     });

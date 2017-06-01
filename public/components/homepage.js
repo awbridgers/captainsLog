@@ -1,5 +1,5 @@
 import React from 'react';
-import Background from '../css/images/background4.png';
+import homePageImage from '../css/images/homepageImage.png';
 import * as firebase from 'firebase';
 import NavBar from './sideBar.js';
 import PropTypes from 'prop-types';
@@ -87,7 +87,7 @@ let getDay = () => {
 }
 
 let divStyle = {
-  backgroundImage: "url(" + Background + ")",
+  backgroundColor: 'black',
   height: "100%",
   width: "100%",
   position: "fixed"
@@ -99,22 +99,22 @@ let divStyle = {
 export class InputText extends React.Component{
 constructor(props){
   super(props);
-  this.state = {userInput: "", loggedIn: false};   //userID: firebase.auth().currentUser.uid
+  this.state = {userInput: ""};   //userID: firebase.auth().currentUser.uid
   this.handleChange = this.handleChange.bind(this);
   this.handleSubmit = this.handleSubmit.bind(this);
-  //this.uid = firebase.auth().currentUser.uid;
-  //this.ref = firebase.database().ref(this.uid);
+  this.loggedIn = true;
   }
   componentWillMount(){
-    if((this.uid = firebase.auth().currentUser.uid) && (this.ref = firebase.database().ref(this.uid))){
-      this.setState({loggedIn: true})
-      console.log(this.state.loggedIn);
+    try {
+      this.uid = firebase.auth().currentUser.uid
+      //this.ref = firebase.database().ref(this.uid);
+
     }
-    else{
-      this.setState({loggedIn: false});
-      console.log(this.state.loggedIn);
+    catch(err){
+      console.log("login Failed");
+      this.loggedIn = false;
     }
-    //console.log(this.uid);
+
 
   }
   handleChange(event){
@@ -132,22 +132,24 @@ constructor(props){
     }
   }
   render(){
-    if(! this.state.loggedIn){
+    if(!this.loggedIn){
       alert("You are not logged in. Please log in to use the Captain's Log");
       return (
         <Redirect to = "/" />
 
       )
     }
-    if(this.state.loggedIn){
+    if(this.loggedIn){
       return (
-        <div style = {{display:"block", textAlign: "center", marginLeft:"auto", marginRight:"auto", marginTop: "300px"}}>
+        <div style = {{display:"block", textAlign: "center", marginLeft:"auto", marginRight:"auto", marginTop: "25px"}}>
+          <img src = {homePageImage}></img>
         <form>
           <textarea rows ='10' onChange = {this.handleChange} value = {this.state.userInput}
-            style = {{width: "800px", height: "175px",resize: 'none',fontSize: 15}}>
+            style = {{width: "600px", height: "175px",resize: 'none',fontSize: 15, marginTop: "20px", marginBottom:"5px"}}>
           </textarea>
           <button type = 'button' onClick = {this.handleSubmit} style = {{width:"100px",
-            height: "50px", position: "relative", display: "block", margin: "auto", borderRadius: "8px" }}>Submit</button>
+            height: "50px", position: "relative", display: "block", margin: "auto",
+            borderRadius: "8px", background:"white", fontSize: 16 }}>Submit</button>
         </form>
         </div>
       );

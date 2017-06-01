@@ -1,6 +1,6 @@
 import React from 'react';
 import {Redirect, Link} from 'react-router-dom';
-import Background from '../css/images/viewerBackgroundAlt2.png';
+import StarfleetLogo from '../css/images/StarfleetLogo.png';
 import NavBar from './sideBar.js';
 import * as firebase from 'firebase';
 import PropTypes from 'prop-types';
@@ -8,23 +8,22 @@ import {Scrollbars} from 'react-custom-scrollbars';
 //import style from "scrollBar.css";
 
 let divStyle = {
-  backgroundImage: "url(" + Background + ")",
+  backgroundColor: 'black',
   height: "100%",
   width: "100%",
   position: "fixed"
 }
 
 let logView ={
-  paddingBottom: "100px", display: "block",
+  paddingBottom: "300px", display: "block",
   margin: "auto",
-  width: "50em",
+  width: "50%",
   marginTop: "-20px",
-  textAlign: "justify",
+  textAlign: "-webkit-justify",
   // -moz-text-align-last: center;
    textAlignLast: "center",
-   whiteSpace: "pre-line"
-
-
+   whiteSpace: "pre-line",
+   wordWrap: "break-word"
 }
 
 const myScrollbar = {
@@ -35,14 +34,14 @@ const myScrollbar = {
 let nextButton = {
   position:"relative", right: "-250px", bottom:"-52px",
   borderRadius:"2px",height: "35px", width: "50px",
-  fontSize: 16, textAlign:"center",
+  fontSize: 16, textAlign:"center", background: "white"
 
 };
 
 let prevButton = {
   position: "relative", left: "-250px", top: "-54px",
   borderRadius:"2px",height: "35px", width: "50px",
-  fontSize: 16, textAlign:"center",
+  fontSize: 16, textAlign:"center", background:"white"
 
 };
 //class constructor
@@ -64,10 +63,12 @@ export class Viewer extends React.Component{
     this.state = {index: 0, logArray: [], loading: true};
     this.previousButtonClick = this.previousButtonClick.bind(this);
     this.nextButtonClick = this.nextButtonClick.bind(this);
+    this.loggedIn = true;
   }
   componentWillMount(){
     this.loadingData = true;
     this.isWaiting = false;
+    try {
     this.uid = firebase.auth().currentUser.uid;
     this.ref = firebase.database().ref(this.uid);
     this.ref.once("value")
@@ -105,6 +106,10 @@ export class Viewer extends React.Component{
 
         }.bind(this));
       }.bind(this));
+    }
+    catch (err) {
+      this.loggedIn = false;
+    }
 
 
 
@@ -133,11 +138,18 @@ export class Viewer extends React.Component{
 
   render(){
     //if no data has loaded into the array yet, just print the page elements with no info
+    if(!this.loggedIn){
+      alert("Please log in to view your logs");
+      return <Redirect to = "/"></Redirect>
+
+    }
     if(this.state.loading){
       return(
         <div style = {{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}>
-          <div style = {{width: "100%", backgroundColor: "blue"}}></div>
-          <span><button style = {nextButton} type ="button">></button>
+          <img src = {StarfleetLogo} style = {{position: "absolute", right: "30px", marginTop: "20px"}}></img>
+          <img src = {StarfleetLogo} style = {{position: "absolute", left: "30px",marginTop: "20px"}}></img>
+          <span style = {{marginTop: "-15px", display: "inline-block"}}>
+          <button style = {nextButton} type ="button">></button>
           <h2><font color = "white">Loading...</font></h2>
           <button style = {prevButton} type = "button">&lt;</button>
           </span>
@@ -147,8 +159,11 @@ export class Viewer extends React.Component{
 
     return (
       <Scrollbars style = {myScrollbar}>
-        <div style = {{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}><font color = "white">
-          <span style = {{display: "inline-block", marginTop: "-35px"}}><button style = {nextButton} type ="button" onClick = {this.nextButtonClick}>></button>
+        <div style = {{textAlign: "center", marginLeft: "auto", marginRight: "auto"}}>
+          <font color = "white">
+            <img src = {StarfleetLogo} style = {{position: "absolute", right: "30px", marginTop: "20px"}}></img>
+            <img src = {StarfleetLogo} style = {{position: "absolute", left: "30px",marginTop: "20px"}}></img>
+          <span style = {{display: "inline-block", marginTop: "-15px"}}><button style = {nextButton} type ="button" onClick = {this.nextButtonClick}>></button>
           <h2><font color = "white">Captain's Log: {this.state.logArray[this.state.index].date}</font></h2>
           <button style = {prevButton} type = "button" onClick = {this.previousButtonClick}>&lt;</button>
           </span>

@@ -1,15 +1,14 @@
 import React from 'react';
 import Style from '../css/loginPage.css';
 import {Redirect, Link} from 'react-router-dom';
-import Background from '../css/images/logInBackground.png';
+import loginImage from '../css/images/LcarsNetwork.png';
 import * as firebase from 'firebase';
 import PropTypes from 'prop-types';
 
 //FIXME: Change background to move with login elements when page is resized
 
 let bigDiv = {
-  backgroundImage: "url(" + Background + ")",
-  backgroundSize: "cover",
+  backgroundColor: 'black',
   position: "fixed",
   height: "100%",
   width: "100%"
@@ -21,12 +20,12 @@ let sectionStyle ={
   marginRight: "auto",
   marginLeft: "auto",
   textAlign: "center",
-  marginTop: "295px"
+  marginTop: "25px"
 
 }
 
 let buttonStyle = {width:"150px",height: "50px", position: "relative",
-    display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
+    display: "block", margin: "auto", borderRadius: "8px", fontSize: 16, background: "white" };
 
 
 
@@ -103,6 +102,7 @@ export default class LoginComp extends React.Component {
       <div style = {bigDiv}>
       <section style = {sectionStyle}>
         <div key='divKey'>
+          <img src = {loginImage}></img>
           <form onSubmit = {this.handleSubmit}>
             <p><input type="text" value = {this.state.username}  placeholder="Username or Email" onChange = {this.changeUser}/></p>
             <p><input type="password" value = {this.state.password} placeholder="Password" onChange = {this.changePass}/></p>

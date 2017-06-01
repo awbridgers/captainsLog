@@ -8167,7 +8167,7 @@ module.exports = warning;
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "5ec19b6ecbc6cb9ad47624b06def44c7.png";
+module.exports = __webpack_require__.p + "6ca7f79b8fdf45bc935c3df2e994b1d1.png";
 
 /***/ }),
 /* 77 */
@@ -12078,8 +12078,8 @@ exports.clearImmediate = clearImmediate;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_logInBackground_png__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_logInBackground_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_images_logInBackground_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_LcarsNetwork_png__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_LcarsNetwork_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_images_LcarsNetwork_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(6);
@@ -12091,14 +12091,14 @@ exports.clearImmediate = clearImmediate;
 
 
 let bigDiv = {
-  backgroundImage: "url(" + __WEBPACK_IMPORTED_MODULE_2__css_images_logInBackground_png___default.a + ")",
+  backgroundColor: 'black',
   position: "fixed",
   height: "100%",
   width: "100%"
 };
 
 let buttonStyle = { width: "150px", height: "50px", position: "relative",
-  display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
+  display: "block", margin: "auto", borderRadius: "8px", fontSize: 16, background: "white" };
 
 class CreateAccount extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor() {
@@ -12158,7 +12158,8 @@ class CreateAccount extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Compon
       { style: bigDiv },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { style: { marginLeft: "auto", marginRight: "auto", textAlign: "center", marginTop: "296px", display: "block" } },
+        { style: { marginLeft: "auto", marginRight: "auto", textAlign: "center", marginTop: "25px", display: "block" } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__css_images_LcarsNetwork_png___default.a }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'p',
           null,
@@ -12203,8 +12204,8 @@ class CreateAccount extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Compon
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_images_background4_png__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_images_background4_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_images_background4_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_images_homepageImage_png__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_images_homepageImage_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_images_homepageImage_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sideBar_js__ = __webpack_require__(43);
@@ -12298,7 +12299,7 @@ let getDay = () => {
 };
 
 let divStyle = {
-  backgroundImage: "url(" + __WEBPACK_IMPORTED_MODULE_1__css_images_background4_png___default.a + ")",
+  backgroundColor: 'black',
   height: "100%",
   width: "100%",
   position: "fixed"
@@ -12309,21 +12310,19 @@ let divStyle = {
 class InputText extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor(props) {
     super(props);
-    this.state = { userInput: "", loggedIn: false }; //userID: firebase.auth().currentUser.uid
+    this.state = { userInput: "" }; //userID: firebase.auth().currentUser.uid
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.uid = firebase.auth().currentUser.uid;
-    //this.ref = firebase.database().ref(this.uid);
+    this.loggedIn = true;
   }
   componentWillMount() {
-    if ((this.uid = __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().currentUser.uid) && (this.ref = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref(this.uid))) {
-      this.setState({ loggedIn: true });
-      console.log(this.state.loggedIn);
-    } else {
-      this.setState({ loggedIn: false });
-      console.log(this.state.loggedIn);
+    try {
+      this.uid = __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().currentUser.uid;
+      //this.ref = firebase.database().ref(this.uid);
+    } catch (err) {
+      console.log("login Failed");
+      this.loggedIn = false;
     }
-    //console.log(this.uid);
   }
   handleChange(event) {
     this.setState({ userInput: event.target.value });
@@ -12339,23 +12338,25 @@ class InputText extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
     }
   }
   render() {
-    if (!this.state.loggedIn) {
+    if (!this.loggedIn) {
       alert("You are not logged in. Please log in to use the Captain's Log");
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* Redirect */], { to: '/' });
     }
-    if (this.state.loggedIn) {
+    if (this.loggedIn) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { style: { display: "block", textAlign: "center", marginLeft: "auto", marginRight: "auto", marginTop: "300px" } },
+        { style: { display: "block", textAlign: "center", marginLeft: "auto", marginRight: "auto", marginTop: "25px" } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_1__css_images_homepageImage_png___default.a }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'form',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { rows: '10', onChange: this.handleChange, value: this.state.userInput,
-            style: { width: "800px", height: "175px", resize: 'none', fontSize: 15 } }),
+            style: { width: "600px", height: "175px", resize: 'none', fontSize: 15, marginTop: "20px", marginBottom: "5px" } }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { type: 'button', onClick: this.handleSubmit, style: { width: "100px",
-                height: "50px", position: "relative", display: "block", margin: "auto", borderRadius: "8px" } },
+                height: "50px", position: "relative", display: "block", margin: "auto",
+                borderRadius: "8px", background: "white", fontSize: 16 } },
             'Submit'
           )
         )
@@ -12393,8 +12394,8 @@ class Homepage extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_loginPage_css__ = __webpack_require__(278);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__css_loginPage_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__css_loginPage_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_images_logInBackground_png__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_images_logInBackground_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_images_logInBackground_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_images_LcarsNetwork_png__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__css_images_LcarsNetwork_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__css_images_LcarsNetwork_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types__ = __webpack_require__(6);
@@ -12409,8 +12410,7 @@ class Homepage extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 //FIXME: Change background to move with login elements when page is resized
 
 let bigDiv = {
-  backgroundImage: "url(" + __WEBPACK_IMPORTED_MODULE_3__css_images_logInBackground_png___default.a + ")",
-  backgroundSize: "cover",
+  backgroundColor: 'black',
   position: "fixed",
   height: "100%",
   width: "100%"
@@ -12422,12 +12422,12 @@ let sectionStyle = {
   marginRight: "auto",
   marginLeft: "auto",
   textAlign: "center",
-  marginTop: "295px"
+  marginTop: "25px"
 
 };
 
 let buttonStyle = { width: "150px", height: "50px", position: "relative",
-  display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
+  display: "block", margin: "auto", borderRadius: "8px", fontSize: 16, background: "white" };
 
 class LoginComp extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor(props) {
@@ -12498,6 +12498,7 @@ class LoginComp extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { key: 'divKey' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__css_images_LcarsNetwork_png___default.a }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'form',
             { onSubmit: this.handleSubmit },
@@ -12562,8 +12563,8 @@ class LoginComp extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_viewerBackgroundAlt2_png__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_viewerBackgroundAlt2_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_images_viewerBackgroundAlt2_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sideBar_js__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase__);
@@ -12581,22 +12582,22 @@ class LoginComp extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
 //import style from "scrollBar.css";
 
 let divStyle = {
-  backgroundImage: "url(" + __WEBPACK_IMPORTED_MODULE_2__css_images_viewerBackgroundAlt2_png___default.a + ")",
+  backgroundColor: 'black',
   height: "100%",
   width: "100%",
   position: "fixed"
 };
 
 let logView = {
-  paddingBottom: "100px", display: "block",
+  paddingBottom: "300px", display: "block",
   margin: "auto",
-  width: "50em",
+  width: "50%",
   marginTop: "-20px",
-  textAlign: "justify",
+  textAlign: "-webkit-justify",
   // -moz-text-align-last: center;
   textAlignLast: "center",
-  whiteSpace: "pre-line"
-
+  whiteSpace: "pre-line",
+  wordWrap: "break-word"
 };
 
 const myScrollbar = {
@@ -12607,14 +12608,14 @@ const myScrollbar = {
 let nextButton = {
   position: "relative", right: "-250px", bottom: "-52px",
   borderRadius: "2px", height: "35px", width: "50px",
-  fontSize: 16, textAlign: "center"
+  fontSize: 16, textAlign: "center", background: "white"
 
 };
 
 let prevButton = {
   position: "relative", left: "-250px", top: "-54px",
   borderRadius: "2px", height: "35px", width: "50px",
-  fontSize: 16, textAlign: "center"
+  fontSize: 16, textAlign: "center", background: "white"
 
 };
 //class constructor
@@ -12630,45 +12631,50 @@ class Viewer extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     this.state = { index: 0, logArray: [], loading: true };
     this.previousButtonClick = this.previousButtonClick.bind(this);
     this.nextButtonClick = this.nextButtonClick.bind(this);
+    this.loggedIn = true;
   }
   componentWillMount() {
     this.loadingData = true;
     this.isWaiting = false;
-    this.uid = __WEBPACK_IMPORTED_MODULE_4_firebase__["auth"]().currentUser.uid;
-    this.ref = __WEBPACK_IMPORTED_MODULE_4_firebase__["database"]().ref(this.uid);
-    this.ref.once("value").then(function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
+    try {
+      this.uid = __WEBPACK_IMPORTED_MODULE_4_firebase__["auth"]().currentUser.uid;
+      this.ref = __WEBPACK_IMPORTED_MODULE_4_firebase__["database"]().ref(this.uid);
+      this.ref.once("value").then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
 
-        let temp = new logEntry(childSnapshot.val().date, childSnapshot.val().logEntry);
+          let temp = new logEntry(childSnapshot.val().date, childSnapshot.val().logEntry);
 
-        if (this.state.logArray.length > 0) {
-          if (this.state.logArray[this.state.index].date === temp.date) {
-            temp.type = "supplemental";
-            let supLog = "\nCaptain's Log Supplemental: " + temp.text;
-            this.state.logArray[this.state.index].text += supLog;
+          if (this.state.logArray.length > 0) {
+            if (this.state.logArray[this.state.index].date === temp.date) {
+              temp.type = "supplemental";
+              let supLog = "\nCaptain's Log Supplemental: " + temp.text;
+              this.state.logArray[this.state.index].text += supLog;
+            }
           }
-        }
 
-        //console.log(temp.type);
-        //console.log(temp.text);
+          //console.log(temp.type);
+          //console.log(temp.text);
 
-        if (temp.type === 'main' && this.loadingData) {
-          let tempArray = this.state.logArray.slice();
-          tempArray.push(temp);
-          this.setState({ logArray: tempArray });
-          this.setState({ index: this.state.logArray.length - 1 });
+          if (temp.type === 'main' && this.loadingData) {
+            let tempArray = this.state.logArray.slice();
+            tempArray.push(temp);
+            this.setState({ logArray: tempArray });
+            this.setState({ index: this.state.logArray.length - 1 });
 
-          //wanted to make a short timeout to allow data to load into the array
-          //set isWaiting to false so that only 1 timeout function exists, so it can be cancelled on unmountd
-          if (!this.isWaiting) {
-            this.isWaiting = true;
-            this.isLoadingData = setTimeout(function () {
-              this.setState({ loading: false });
-            }.bind(this), 500);
+            //wanted to make a short timeout to allow data to load into the array
+            //set isWaiting to false so that only 1 timeout function exists, so it can be cancelled on unmountd
+            if (!this.isWaiting) {
+              this.isWaiting = true;
+              this.isLoadingData = setTimeout(function () {
+                this.setState({ loading: false });
+              }.bind(this), 500);
+            }
           }
-        }
+        }.bind(this));
       }.bind(this));
-    }.bind(this));
+    } catch (err) {
+      this.loggedIn = false;
+    }
   }
 
   previousButtonClick() {
@@ -12689,14 +12695,19 @@ class Viewer extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   render() {
     //if no data has loaded into the array yet, just print the page elements with no info
+    if (!this.loggedIn) {
+      alert("Please log in to view your logs");
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["d" /* Redirect */], { to: '/' });
+    }
     if (this.state.loading) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: { textAlign: "center", marginLeft: "auto", marginRight: "auto" } },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { style: { width: "100%", backgroundColor: "blue" } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png___default.a, style: { position: "absolute", right: "30px", marginTop: "20px" } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png___default.a, style: { position: "absolute", left: "30px", marginTop: "20px" } }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'span',
-          null,
+          { style: { marginTop: "-15px", display: "inline-block" } },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { style: nextButton, type: 'button' },
@@ -12729,9 +12740,11 @@ class Viewer extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'font',
           { color: 'white' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png___default.a, style: { position: "absolute", right: "30px", marginTop: "20px" } }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__css_images_StarfleetLogo_png___default.a, style: { position: "absolute", left: "30px", marginTop: "20px" } }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'span',
-            { style: { display: "inline-block", marginTop: "-35px" } },
+            { style: { display: "inline-block", marginTop: "-15px" } },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'button',
               { style: nextButton, type: 'button', onClick: this.nextButtonClick },
@@ -13040,13 +13053,13 @@ function toComment(sourceMap) {
 /* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "c6d953c76ad057524d2f62f9e424f3a0.png";
+module.exports = __webpack_require__.p + "b2df7409ac03ec954c173a5f0f50ef31.png";
 
 /***/ }),
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "023de0a583b13bd08de515b857a2823a.png";
+module.exports = __webpack_require__.p + "e46f955bae19647acbb246b7fc8f12c7.png";
 
 /***/ }),
 /* 127 */

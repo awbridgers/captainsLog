@@ -1,19 +1,19 @@
 import React from 'react';
 import {Redirect, Link} from 'react-router-dom';
-import Background from '../css/images/logInBackground.png';
+import LcarsImage from '../css/images/LcarsNetwork.png';
 import * as firebase from 'firebase';
 import PropTypes from 'prop-types';
 
 
 let bigDiv = {
-  backgroundImage: "url(" + Background + ")",
+  backgroundColor: 'black',
   position: "fixed",
   height: "100%",
   width: "100%"
 }
 
 let buttonStyle = {width:"150px",height: "50px", position: "relative",
-    display: "block", margin: "auto", borderRadius: "8px", fontSize: 16 };
+    display: "block", margin: "auto", borderRadius: "8px", fontSize: 16, background: "white" };
 
 export default class CreateAccount extends React.Component{
   constructor(){
@@ -80,7 +80,8 @@ export default class CreateAccount extends React.Component{
     }
     return (
       <div style ={bigDiv}>
-        <div style = {{marginLeft: "auto", marginRight: "auto", textAlign: "center", marginTop:"296px", display: "block"}}>
+        <div style = {{marginLeft: "auto", marginRight: "auto", textAlign: "center", marginTop:"25px", display: "block"}}>
+          <img src = {LcarsImage}></img>
         <p><input type = "text" placeholder = "Email" onChange = {this.handleEmail} /></p>
         <p><input type = "password" placeholder = "Password" onChange ={this.handlePass} /></p>
         <p><input type = "password" placeholder = "Confirm Password" onChange = {this.handleConfirm}/></p>
@@ -93,7 +94,7 @@ export default class CreateAccount extends React.Component{
   componentWillUnmount(){
     if(this.state.unMount){
     this.checkUser();
-  }
+    }
   }
 
 
