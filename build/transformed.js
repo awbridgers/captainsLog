@@ -5228,7 +5228,7 @@ class NavBar extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     console.log(__WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().currentUser.uid);
     __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().signOut().then(function () {
 
-      console.log('sign out worked!');
+      //console.log('sign out worked!');
     }, function (error) {
       alert(error);
     });
@@ -12318,7 +12318,9 @@ class InputText extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
   componentWillMount() {
     try {
       this.uid = __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().currentUser.uid;
-      //this.ref = firebase.database().ref(this.uid);
+      this.ref = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref(this.uid);
+      // console.log(this.uid);
+      // console.log(this.ref);
     } catch (err) {
       console.log("login Failed");
       this.loggedIn = false;
@@ -12330,6 +12332,8 @@ class InputText extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
   handleSubmit() {
     if (this.state.userInput.length > 0 && confirm("Are you ready to post this entry?")) {
       this.date = getDay();
+      //console.log(this.date);
+      //console.log(this.state.userInput)
       this.ref.push({ date: this.date, logEntry: this.state.userInput });
       //console.log("Log Entry Succesfully Posted!");
       this.setState({ userInput: "" }); //reset text field to be empty

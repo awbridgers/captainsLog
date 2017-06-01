@@ -108,6 +108,8 @@ constructor(props){
     try {
       this.uid = firebase.auth().currentUser.uid
       this.ref = firebase.database().ref(this.uid);
+      // console.log(this.uid);
+      // console.log(this.ref);
 
     }
     catch(err){
@@ -123,6 +125,8 @@ constructor(props){
   handleSubmit(){
     if(this.state.userInput.length > 0 && confirm("Are you ready to post this entry?")){
       this.date = getDay();
+      //console.log(this.date);
+      //console.log(this.state.userInput)
       this.ref.push({date: this.date, logEntry: this.state.userInput});
       //console.log("Log Entry Succesfully Posted!");
       this.setState({userInput: ""});     //reset text field to be empty
