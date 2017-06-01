@@ -107,7 +107,7 @@ constructor(props){
   componentWillMount(){
     try {
       this.uid = firebase.auth().currentUser.uid
-      //this.ref = firebase.database().ref(this.uid);
+      this.ref = firebase.database().ref(this.uid);
 
     }
     catch(err){
