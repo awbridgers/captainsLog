@@ -48,6 +48,7 @@ export default class NavBar extends React.Component{
       <NavBarItem url = "/home" text = "Home" />
       <NavBarItem url = "/viewer" text = "View Logs" />
       <NavBarItem url = "/about" text = "About" />
+      <NavBarItem url = "/calendar-view" text = "Calendar View" />
 
       <Link to = "/" style = {logOutSyle} onClick = {this.logOut}>Log Out</Link></div>)
 

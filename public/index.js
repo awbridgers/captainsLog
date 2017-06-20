@@ -6,6 +6,7 @@ import LoginPage from './components/logIn.js';
 import CreatePage from './components/create.js';
 import ViewerPage from './components/logViewer.js';
 import PropTypes from 'prop-types';
+import CalendarView from './components/calendarView.js';
 
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import * as firebase from 'firebase'
@@ -44,6 +45,7 @@ const App = () => (
     <Route path ="/about" component = {About} />
     <Route path = "/create" component = {CreatePage} />
     <Route path = "/viewer" component = {ViewerPage} />
+    <Route path = "/calendar-view" component = {CalendarView} />
     </div>
   </Router>
 )
