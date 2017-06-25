@@ -51,6 +51,83 @@ function logEntry (date, text){
     this.type = "main";
 };
 
+let getMonth = (month) => {
+  let monthName;
+  switch (month) {
+    case 0:
+        monthName = "January";
+        break;
+    case 1:
+        monthName = "February";
+        break;
+    case 2:
+        monthName = "March";
+        break;
+    case 3:
+        monthName = "April";
+        break;
+    case 4:
+        monthName = "May";
+        break;
+    case 5:
+        monthName = "June";
+        break;
+    case 6:
+        monthName = "July";
+        break;
+    case 7:
+        monthName = "August";
+        break;
+    case 8:
+        monthName = "September";
+        break;
+    case 9:
+        monthName = "October";
+        break;
+    case 10:
+        monthName = "November";
+        break;
+    case 11:
+        monthName = "December";
+        break;
+
+  }
+  return monthName;
+};
+let getDayOfWeek = (day) => {
+  let dayName;
+  switch (day) {
+    case 0:
+        dayName = "Sun.";
+        break;
+    case 1:
+        dayName = "Mon.";
+        break;
+    case 2:
+        dayName = "Tue.";
+        break;
+    case 3:
+        dayName = "Wed.";
+        break;
+    case 4:
+        dayName = "Thu.";
+        break;
+    case 5:
+        dayName = "Fri.";
+        break;
+    case 6:
+        dayName = "Sat.";
+  }
+  return dayName;
+}
+let getDay = (today) => {
+
+  let day = getDayOfWeek(today.getDay());
+  let dd = today.getDate();
+  let mm = today.getMonth()+1;
+  let yyyy= today.getFullYear();
+  return (day + " " + mm + "-" + dd + "-" + yyyy);
+}
 
 
 
@@ -75,7 +152,11 @@ export class Viewer extends React.Component{
       .then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
 
-          let temp = new logEntry(childSnapshot.val().date, childSnapshot.val().logEntry);
+          let tempDate = new Date(childSnapshot.val().date);
+          let dateText = getDay(tempDate);
+          console.log(dateText);
+
+          let temp = new logEntry(dateText, childSnapshot.val().logEntry);
 
 
           if(this.state.logArray.length > 0){

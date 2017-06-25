@@ -83,7 +83,7 @@ let getDay = () => {
   let dd = today.getDate();
   let mm = today.getMonth()+1;
   let yyyy= today.getFullYear();
-  return (day +" "+ mm+"-" +dd+"-"+yyyy)
+  return today;
 }
 
 let divStyle = {
@@ -125,9 +125,9 @@ constructor(props){
   handleSubmit(){
     if(this.state.userInput.length > 0 && confirm("Are you ready to post this entry?")){
       this.date = getDay();
-      //console.log(this.date);
+      console.log(this.date);
       //console.log(this.state.userInput)
-      this.ref.push({date: this.date, logEntry: this.state.userInput});
+      this.ref.push({date: this.date.toString(), logEntry: this.state.userInput});
       //console.log("Log Entry Succesfully Posted!");
       this.setState({userInput: ""});     //reset text field to be empty
     }
