@@ -34,7 +34,7 @@ export default class LoginComp extends React.Component {
   constructor(props){
     super();
     //FIXME: REMOVE USER AND PASS AFTER TESTING
-    this.state = {username: "test@test.com", password: "123456", redirect: false, unMount: false};
+    this.state = {username: "", password: "", redirect: false, unMount: false};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeUser = this.changeUser.bind(this);
     this.changePass = this.changePass.bind(this);
