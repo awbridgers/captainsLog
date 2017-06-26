@@ -41,7 +41,7 @@ html {
     width: 100%;
     position:relative;
     text-align: center;
-    height: 75px;
+    height: 65px;
     justify-content: center;
 
 }
@@ -61,7 +61,7 @@ html {
     white-space: nowrap;
     text-indent: -10000px;
     cursor: pointer;
-    height: 35px;
+    height: 30px;
     width: 75%;
     top: 5px;
 
