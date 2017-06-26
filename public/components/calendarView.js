@@ -7,6 +7,7 @@ import {Redirect, Link} from 'react-router-dom';
 import EventCalendar from 'react-event-calendar';
 import moment from 'moment';
 import style from "../css/calendar.css";
+import {Scrollbars} from 'react-custom-scrollbars';
 
 let getMonthName = (month) => {
   let monthName;
@@ -81,31 +82,101 @@ let divStyle = {
 let calendarStyle ={
   position: "relative",
   color: "white",
-  width: "535px",
+
   textAlign: "center",
   height: "475px",
+
 }
 let spacer = {
   position: "relative",
+  top: "20px",
   color: "white",
   width: "535px",
+  height: "5px",
   textAlign: "center",
-
 }
+
+const myScrollbar = {
+      width: "100%",
+      height: "100%",
+
+    };
+
+const viewerStyle = {
+  backgroundColor: "blue",
+  width: "50%",
+  float: "right",
+  height: "500px",
+  marginRight: "50px",
+  textAlign: "center"
+}
+let logView ={
+  color: "white",
+  width: "50%",
+  minWidth: "535px",
+  height: "500px",
+  marginRight: "50px",
+  float: "right",
+  textAlign: "-webkit-justify",
+  // -moz-text-align-last: center;
+   textAlignLast: "center",
+   whiteSpace: "pre-line",
+   wordWrap: "break-word"
+}
+
+
 function logEntry (date, text){
-  this.start = date;
-  this.end = date;
+  this.start = fixDate(date);
+  this.end = this.start
   this.eventClasses= 'main';
   this.description = text;
-
+  this.dateText = dateText(date);
 
 };
 
+let getDayOfWeek = (day) => {
+  let dayName;
+  switch (day) {
+    case 0:
+        dayName = "Sun.";
+        break;
+    case 1:
+        dayName = "Mon.";
+        break;
+    case 2:
+        dayName = "Tue.";
+        break;
+    case 3:
+        dayName = "Wed.";
+        break;
+    case 4:
+        dayName = "Thu.";
+        break;
+    case 5:
+        dayName = "Fri.";
+        break;
+    case 6:
+        dayName = "Sat.";
+  }
+  return dayName;
+}
+
+//return the date in the format required for the calendar
 function fixDate(date){
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
   return (year + "-" + month + "-"+ day);
+}
+
+//return the date in an american style format
+function dateText(date){
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let dayOfWeek = getDayOfWeek(date.getDay());
+  return ("Captain's Log: " +dayOfWeek + " " + month + "-" + day + "-" + year);
+
 }
 
 const events = [
@@ -130,13 +201,15 @@ export class Calendar extends React.Component{
     let date = today.getDate();
     let monthName = getMonthName(month);
     this.logArray =[];
-    this.state = {year: year, month: month, date: date, monthName: monthName, logArray: [], loading: true};
+    this.state = {year: year, month: month, date: date, monthName: monthName,
+      logArray: [], loading: true, text: "", textDate:""};
     this.handleClick = this.handleClick.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
     this.previousMonth = this.previousMonth.bind(this);
     this.nextYear = this.nextYear.bind(this);
     this.previousYear = this.previousYear.bind(this);
     this.returnToToday=this.returnToToday.bind(this);
+    this.handleEventClick=this.handleEventClick.bind(this);
     }
 
     componentWillMount(){
@@ -152,10 +225,10 @@ export class Calendar extends React.Component{
 
 
             let tempDate = new Date(childSnapshot.val().date);
-            let dateText = fixDate(tempDate);
+            //let dateText = fixDate(tempDate);
             //console.log(dateText);
 
-            let temp = new logEntry(dateText, childSnapshot.val().logEntry);
+            let temp = new logEntry(tempDate, childSnapshot.val().logEntry);
             //console.log(temp);
 
 
@@ -163,7 +236,7 @@ export class Calendar extends React.Component{
               let length = this.state.logArray.length - 1;
                 if(this.state.logArray[length].start === temp.start){
                     temp.eventClasses = "supplemental"
-                    let supLog = "\nCaptain's Log Supplemental: " + temp.text;
+                    let supLog = "\nCaptain's Log Supplemental: " + temp.description;
                     this.state.logArray[length].description += supLog;
                 }
               }
@@ -253,6 +326,10 @@ export class Calendar extends React.Component{
       this.setState ({year: year, month: month, date: date, monthName: monthName});
     }
 
+    handleEventClick(target, eventData, day){
+      this.setState({text: eventData.description, textDate: eventData.dateText});
+    }
+
 
 
   render(){
@@ -260,7 +337,8 @@ export class Calendar extends React.Component{
       return <div><h1></h1></div>
       }
     return (
-    <div>
+    <div style = {{display: "inline-block", width: "100%", margin: "10px", minWidth: "1200px"}}>
+      <div style = {{float: "left"}}>
       <div style ={calendarStyle}>
         <span>
           <button type = "button" style = {returnButton} onClick = {this.returnToToday}>Today</button>
@@ -269,7 +347,7 @@ export class Calendar extends React.Component{
           <button type = "button" style = {nextButton} onClick={this.nextMonth}>&gt;</button>
           </span>
         <EventCalendar month = {this.state.month} year = {this.state.year} events ={this.state.logArray}
-          onEventClick={(target, eventData, day) => console.log(eventData)} />
+          onEventClick={this.handleEventClick} />
       </div>
       <div style = {spacer}>
         <span>
@@ -277,6 +355,13 @@ export class Calendar extends React.Component{
           <div style = {{display: "inline-block", width: "200px"}}><h1>{this.state.year}</h1></div>
           <button type = "button" style = {nextButton} onClick ={this.nextYear}>&gt;</button>
           </span>
+      </div>
+    </div>
+      <div style = {logView}>
+        <h2>{this.state.textDate}</h2>
+        <Scrollbars style = {myScrollbar}>
+          <div style = {{paddingBottom: "200px"}}>{this.state.text}</div>
+        </Scrollbars>
       </div>
     </div>
   )

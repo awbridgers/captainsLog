@@ -44,11 +44,12 @@ export default class NavBar extends React.Component{
     });
   }
   render() {
-    return (<div style = {{ backgroundColor: 'black', padding: "0px", width: "100%", margin: "0px", position: "relative"}}>
+    return (<div style = {{ backgroundColor: 'black', padding: "0px", width: "100%", margin: "0px", position: "relative", minWidth: "500px"}}>
       <NavBarItem url = "/home" text = "Home" />
       <NavBarItem url = "/viewer" text = "View Logs" />
+      <NavBarItem url = "/calendar-view" text = "Calendar Viewer" />
       <NavBarItem url = "/about" text = "About" />
-      <NavBarItem url = "/calendar-view" text = "Calendar View" />
+
 
       <Link to = "/" style = {logOutSyle} onClick = {this.logOut}>Log Out</Link></div>)
 
