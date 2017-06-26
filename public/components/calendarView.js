@@ -92,6 +92,21 @@ let spacer = {
   textAlign: "center",
 
 }
+function logEntry (date, text){
+  this.start = date;
+  this.end = date;
+  this.eventClasses= 'main';
+  this.description = text;
+
+
+};
+
+function fixDate(date){
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  return (year + "-" + month + "-"+ day);
+}
 
 const events = [
     {
@@ -114,7 +129,8 @@ export class Calendar extends React.Component{
     let month = today.getMonth();
     let date = today.getDate();
     let monthName = getMonthName(month);
-    this.state = {year: year, month: month, date: date, monthName: monthName};
+    this.logArray =[];
+    this.state = {year: year, month: month, date: date, monthName: monthName, logArray: [], loading: true};
     this.handleClick = this.handleClick.bind(this);
     this.nextMonth = this.nextMonth.bind(this);
     this.previousMonth = this.previousMonth.bind(this);
@@ -122,6 +138,65 @@ export class Calendar extends React.Component{
     this.previousYear = this.previousYear.bind(this);
     this.returnToToday=this.returnToToday.bind(this);
     }
+
+    componentWillMount(){
+      //load the data into an array--> copy and pasted from logViewer
+      this.isWaiting = false;
+      this.loadingData = true;
+      try {
+      this.uid = firebase.auth().currentUser.uid;
+      this.ref = firebase.database().ref(this.uid);
+      this.ref.once("value")
+        .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+
+
+            let tempDate = new Date(childSnapshot.val().date);
+            let dateText = fixDate(tempDate);
+            //console.log(dateText);
+
+            let temp = new logEntry(dateText, childSnapshot.val().logEntry);
+            //console.log(temp);
+
+
+            if(this.state.logArray.length > 0){
+              let length = this.state.logArray.length - 1;
+                if(this.state.logArray[length].start === temp.start){
+                    temp.eventClasses = "supplemental"
+                    let supLog = "\nCaptain's Log Supplemental: " + temp.text;
+                    this.state.logArray[length].description += supLog;
+                }
+              }
+
+
+
+            //if(temp.type === 'main'){
+            if(this.loadingData && temp.eventClasses === 'main'){
+              let tempArray = this.state.logArray.slice()
+              tempArray.push(temp);
+              this.setState({logArray: tempArray});
+              console.log(tempArray);
+
+              if(!this.isWaiting){
+                this.isWaiting = true;
+                this.isLoadingData = setTimeout(function() { this.setState({loading: false});}.bind(this), 500);
+              }
+            }
+
+
+
+
+          }.bind(this));
+        }.bind(this));
+      }
+      catch (err) {
+        this.loggedIn = false;
+      }
+
+
+
+    }
+
 
     handleClick(){
       console.log(events.description);
@@ -181,6 +256,9 @@ export class Calendar extends React.Component{
 
 
   render(){
+    if(this.state.loading){
+      return <div><h1></h1></div>
+      }
     return (
     <div>
       <div style ={calendarStyle}>
@@ -190,7 +268,7 @@ export class Calendar extends React.Component{
           <div style = {{display: "inline-block", width: "200px", textAlign: "center"}}><h1>{this.state.monthName}</h1></div>
           <button type = "button" style = {nextButton} onClick={this.nextMonth}>&gt;</button>
           </span>
-        <EventCalendar month = {this.state.month} year = {this.state.year} events ={events}
+        <EventCalendar month = {this.state.month} year = {this.state.year} events ={this.state.logArray}
           onEventClick={(target, eventData, day) => console.log(eventData)} />
       </div>
       <div style = {spacer}>
@@ -202,6 +280,10 @@ export class Calendar extends React.Component{
       </div>
     </div>
   )
+  }
+  componentWillUnmount(){
+    this.loadingData = false;
+    window.clearTimeout(this.isLoadingData);
   }
 
 
