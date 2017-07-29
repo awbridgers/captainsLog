@@ -9,5 +9,5 @@ The App is very simple to use, simply:
 1. Write entries and send them to the LCARS network for later viewing
 2. View recent logs in the "Log Viewer" tab
 3. Use the "Calendar Viewer" tab to search and view Logs using the Date
-##Authors
+## Authors
 Adam Bridgers
