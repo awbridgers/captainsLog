@@ -2,6 +2,7 @@
   "name": "captainsLog",
   "version": "1.0.0",
   "description": "a simple test",
+  "homepage": "https://gitub.io/awbridgers/captainsLog",
   "main": "app.js",
   "scripts": {
     "build": "webpack",
