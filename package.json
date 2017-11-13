@@ -2,13 +2,14 @@
   "name": "captainsLog",
   "version": "1.0.0",
   "description": "a simple test",
-  "homepage": "https://github.com/awbridgers/reactTest",
+  "homepage": "https://gitub.io/awbridgers/captainsLog",
   "main": "app.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "deploy": "npm run build&&gh-pages -d build"
+    "deploy" : "npm run build&&gh-pages -d build"
   },
+  "homepage": "https://github.com/awbridgers/reactTest",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/awbridgers/reactTest.git"
