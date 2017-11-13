@@ -8,7 +8,7 @@ import ViewerPage from './components/logViewer.js';
 import PropTypes from 'prop-types';
 import CalendarView from './components/calendarView.js';
 
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import * as firebase from 'firebase'
 
 const Home = () => <h1><Link to= "/about">Click Me</Link></h1>
